@@ -2,6 +2,7 @@
 require_once ('controller/main_controller.php');
 
 $mainController = new MainController();
+<<<<<<< HEAD
 //$mainController->viewReturn();
 // var_dump($_POST);
 switch ($_POST) {
@@ -17,3 +18,6 @@ switch ($_POST) {
         return $mainController->prodAction();
     break;
 }
+=======
+$mainController->viewReturn();
+>>>>>>> master
