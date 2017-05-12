@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Form</title>
 
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
     <h1>Select Form:</h1>
@@ -19,6 +19,10 @@
                     <div class="col-sm-6">
                         <select class="form-control" name="country" id="country">
                             <option disabled selected>Choose...</option>
+                            <?php
+                            $data = new MainController();
+                            $countries = $data->typeAction();
+                            ?>
                             <?php foreach($countries as $country): ?>
                                 <option value="<?=$country['Code']?>"><?=$country['Name']?></option>
                             <?php endforeach; ?>
@@ -52,8 +56,8 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../js/main.js"></script>
 
     </body>
 </html>
