@@ -4,7 +4,7 @@ $(function(){
     $('#country').change(function() {
         $(".city-select").show();
         var code = $("#country").val();
-        $.post( "actions/getSubtype.php", {code: code},function(data) {
+        $.post( "../index.php", {code: code},function(data) {
             wrOption(data, '#city', '.city-select');
         });
     });
@@ -14,8 +14,8 @@ $(function(){
 
     $('#city').change(function() {
         $(".model-select").show();
-        var code = $("#city").val();
-        $.post('actions/getModels.php', {code: code}, function(data) {
+        var lol = $("#city").val();
+        $.post('../index.php', {lol: lol}, function(data) {
             wrOption(data, '#model', '.model-select');
         });
 
