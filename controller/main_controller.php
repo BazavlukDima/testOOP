@@ -1,5 +1,4 @@
 <?php
-require ('./models/abstract_model.php');
 require('./models/type_model.php');
 require('./models/sub_type_model.php');
 require('./models/products_model.php');
@@ -8,6 +7,7 @@ class MainController
 {
     public function viewReturn()
     {
+        $countries = $this->typeAction();
         include ('./view/main_view.php');
     }
 
@@ -22,13 +22,13 @@ class MainController
     {
         $SubTypeResult = new SubTypeModel();
 
-        return $SubTypeResult->getDataFromDB('subt', $_POST['code']);
+        echo json_encode($SubTypeResult->getDataFromDbSubType($_POST['code']));
     }
 
     public function prodAction()
     {
         $prodResult = new ProductsModel();
 
-        return $prodResult->getDataFromDB('models', $_POST['lol']);
+        echo json_encode($prodResult->getDataFromDbModels($_POST['lol']));
     }
 }

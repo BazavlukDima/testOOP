@@ -2,16 +2,20 @@
 require_once ('controller/main_controller.php');
 
 $mainController = new MainController();
-switch ($_POST) {
-    case is_null($_POST):
-        $mainController->viewReturn();
-    break;
+if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) && empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+    $mainController->viewReturn();
+} else {
+    switch ($_POST) {
+    // case empty($_POST):
+    //     $data = $mainController->typeAction();
+    // break;
 
-    case !is_null(@$_POST['code']):
+    case !empty($_POST['code']):
         return $mainController->subTypeAction();
     break;
 
-    case!is_null(@$_POST['lol']):
+    case !empty($_POST['lol']):
         return $mainController->prodAction();
     break;
+    }
 }

@@ -1,9 +1,26 @@
 <?php
+
 abstract class AbstractModel
 {
+    private $serverName;
+    private $username;
+    private $password;
+    private $dbName;
+
+    public $connection;
+
+    public function __construct()
+    {
+        $this->serverName = 'localhost';
+        $this->username = 'root';
+        $this->password = '';
+        $this->dbName = 'test';
+        $this->connection = mysqli_connect($this->serverName, $this->username, $this->password, $this->dbName);
+    }
+
     public function returnQuery($query)
     {
-        return mysqli_query($this->makeConnection(), $query);
+        return mysqli_query($this->connection, $query);
     }
 
     public function returnFetch($res)
@@ -16,47 +33,19 @@ abstract class AbstractModel
         return mysqli_fetch_all($res, MYSQLI_ASSOC);
     }
 
-    public function tableConnection($path, $log, $pass, $table)
+    public function escapeString($prev)
     {
-        return mysqli_connect($path, $log, $pass, $table);
+        return mysqli_real_escape_string($this->connection, $prev);
+
     }
 
-    public function tableCharset($db, $type)
+    public function getRow($res)
     {
-        return mysqli_set_charset($db, $type);
-    }
-
-    public function makeConnection()
-    {
-        $db = $this->tableConnection("localhost", "root", "", "test") or die("No connection with DB");
-        $this->tableCharset($db, "utf8") or die("Don't set charset of connection");
-
-        return $db;
-    }
-
-    public function getDataFromDB($table,$prev)//getallrow
-    {
-        $code = mysqli_real_escape_string($this->makeConnection(), $prev);
-
-        $query = "SELECT ID, Name FROM $table WHERE CountryCode = '$code'";
-        $res = $this->returnQuery($query);
-
         $data = '';
         while ($row = $this->returnFetch($res)) {
             $data[$row['ID']] = $row['Name'];
         }
 
-        echo json_encode($data);
-    }
-
-    public function getType()
-    {
-
-        $query = "SELECT Code, Name FROM type";
-
-        $res = $this->returnQuery($query);
-        $dataArr = $this->returnFetchAll($res);
-
-        return $dataArr;
+        return $data;
     }
 }

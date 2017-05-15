@@ -19,10 +19,6 @@
                     <div class="col-sm-6">
                         <select class="form-control" name="country" id="country">
                             <option disabled selected>Choose...</option>
-                            <?php
-                            $data = new MainController();
-                            $countries = $data->typeAction();
-                            ?>
                             <?php foreach($countries as $country): ?>
                                 <option value="<?=$country['Code']?>"><?=$country['Name']?></option>
                             <?php endforeach; ?>

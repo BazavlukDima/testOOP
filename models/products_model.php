@@ -1,24 +1,15 @@
 <?php
-//include ('abstract_model.php');
+require_once ('./models/abstract_model.php');
 
 class ProductsModel extends AbstractModel
 {
-    /*public function getDataFromDB($db,$lol)
+    public function getDataFromDbModels($prev)
     {
-        $code = mysqli_real_escape_string($db, $lol);
+        $code = $this->escapeString($prev);
 
         $query = "SELECT ID, Name FROM models WHERE CountryCode = '$code'";
-        $res = mysqli_query($db, $query);
+        $res = $this->returnQuery($query);
 
-        $data = '';
-        while ($row = mysqli_fetch_assoc($res)) {
-            $data[$row['ID']] = $row['Name'];
-        }
-
-        return json_encode($data);
-    }*/
-    /*public function ReturnDb($db,$lol)
-    {
-    getDataFromDB($db, 'models', $lol);
-    }*/
+        return $this->getRow($res);
+    }
 }
